@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VendingMachine
 {
@@ -18,7 +14,7 @@ namespace VendingMachine
 
             do
             {
-                menuChoice = GetChoice(4, "\n\n1. Insert coins\n2. Purchase an item\n3. Consume an item\n4. End\n");
+                menuChoice = GetChoice(5, "\n\n1. Insert coins\n2. Purchase an item\n3. Consume an item\n4. Examine an item\n5. End\n");
 
                 switch (menuChoice)
                 {
@@ -37,6 +33,7 @@ namespace VendingMachine
                         break;
                     case '2':
                         Console.WriteLine("\n\nChoose 1. Fanta, 2. Popcorn, 3. Sandwich or 4. To End");
+                        Console.WriteLine("Press Enter to list items you have bought.");
                         do
                         {
                             choice = GetChoice(4, $"\rSum: {user.Sum}. Please choose an item to purchase: ");
@@ -72,11 +69,12 @@ namespace VendingMachine
                         Console.WriteLine($"\nYou have {user.Sum} in change left.");
                         break;
                     case '3':
-                        Console.WriteLine("You will now consume items you have bought.");
-                        Console.WriteLine("\n\nChoose 1. Fanta, 2. Popcorn, 3. Sandwich or 4. To End");
+                        Console.WriteLine("\n\nYou will now consume items you have bought.");
+                        Console.WriteLine("Press Enter to list items you have bought.");
                         do
                         {
-                            choice = GetChoice(4, $"\rSum: {user.Sum}. Please choose an item to consume: ");
+                            Console.WriteLine("\n\nChoose 1. Fanta, 2. Popcorn, 3. Sandwich or 4. To End");
+                            choice = GetChoice(4, $"\r# of items left: {user.ItemList.Count}. Please choose an item to consume: ");
                             switch (choice)
                             {
                                 case '1':
@@ -90,10 +88,35 @@ namespace VendingMachine
                                     break;
                                 default:
                                     Console.WriteLine("\n\nRemaining items bought:");
-                                    foreach(string item in user.ItemList)
+                                    foreach (string item in user.ItemList)
                                     {
                                         Console.WriteLine(item);
                                     }
+                                    break;
+                            }
+                        } while (choice != '4' && user.ItemList.Count > 0);
+                        break;
+                    case '4':
+                        Console.WriteLine("\n\nYou will now examine items in the machine.");
+                        do
+                        {
+                            Console.WriteLine("\n\nExamine 1. Fanta, 2. Popcorn, 3. Sandwich or 4. To End");
+                            choice = GetChoice(4, $"\rItem to examine: ");
+                            switch (choice)
+                            {
+                                case '1':
+                                    Fanta fanta = new Fanta();
+                                    fanta.Examine();
+                                    break;
+                                case '2':
+                                    Popcorn popcorn = new Popcorn();
+                                    popcorn.Examine();
+                                    break;
+                                case '3':
+                                    Sandwich sandwich = new Sandwich();
+                                    sandwich.Examine();
+                                    break;
+                                default:
                                     break;
                             }
                         } while (choice != '4');
@@ -101,7 +124,7 @@ namespace VendingMachine
                     default:
                         break;
                 }
-            } while (menuChoice != '3');
+            } while (menuChoice != '5');
             Console.WriteLine($"\n\nHere you have your {user.Sum}kr back.");
         }
 

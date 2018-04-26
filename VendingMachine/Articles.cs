@@ -35,7 +35,7 @@ namespace VendingMachine
 
         public override int Examine()
         {
-            Console.WriteLine($"Inherited abstract Examine {Price}");
+            Console.WriteLine($". Fanta is a soft drink with too much sugar and costs {Price}kr.");
             return Price;
         }
     }
@@ -51,7 +51,7 @@ namespace VendingMachine
 
         public override int Examine()
         {
-            Console.WriteLine($"Inherited abstract Examine {Price}");
+            Console.WriteLine($". Popcorn is slightly better for you but mostly air and costs {Price}kr.");
             return Price;
         }
     }
@@ -68,7 +68,7 @@ namespace VendingMachine
         public override int Examine()
         {
             Price = 5;
-            Console.WriteLine($"Inherited abstract Examine {Price}");
+            Console.WriteLine($". This sandwich will serve you with much needed energy for the modest price {Price}kr.");
             return Price;
         }
     }
